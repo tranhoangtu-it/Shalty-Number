@@ -5,9 +5,12 @@ node_modules/
 dist/
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Editor directories and files
 .vscode/
@@ -20,15 +23,22 @@ npm-debug.log*
 
 # OS generated files
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+ehthumbs.db
 
 # Environment
 *.local
-.env*
+.env
+.env.*
 
-# Capacitor Native
-android/
-ios/
+# TypeScript
+*.tsbuildinfo
 
-# Agent folder
+# Capacitor Native (comment out if you want to include)
+# android/
+# ios/
+
+# Agent folder (IDE assistant)
 .agent/

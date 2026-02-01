@@ -18,9 +18,14 @@ export interface LevelConfig {
 export const LEVELS: LevelConfig[] = [
     { level: 1, rows: 3, cols: 3, timeLimit: 40 },
     { level: 2, rows: 4, cols: 4, timeLimit: 40 },
-    { level: 3, rows: 5, cols: 5, timeLimit: 40 },
-    { level: 4, rows: 6, cols: 6, timeLimit: 50 }, // Increased time for larger grids
-    { level: 5, rows: 7, cols: 7, timeLimit: 60 },
+    { level: 3, rows: 5, cols: 5, timeLimit: 45 },
+    { level: 4, rows: 5, cols: 6, timeLimit: 50 },
+    { level: 5, rows: 6, cols: 6, timeLimit: 55 },
+    { level: 6, rows: 6, cols: 7, timeLimit: 60 },
+    { level: 7, rows: 7, cols: 7, timeLimit: 65 },
+    { level: 8, rows: 7, cols: 8, timeLimit: 70 },
+    { level: 9, rows: 8, cols: 8, timeLimit: 75 },
+    { level: 10, rows: 8, cols: 9, timeLimit: 80 },
 ];
 
 export const useGameLogic = () => {
@@ -63,12 +68,16 @@ export const useGameLogic = () => {
     const nextLevel = useCallback(() => {
         if (levelIndex < LEVELS.length - 1) {
             setLevelIndex(prev => prev + 1);
-            // Don't auto-start next level, let user click "Next Level"
-            setStatus('level_complete');
+            // Start the next level immediately
+            const nextConfig = LEVELS[levelIndex + 1];
+            setNumbers(generateNumbers(nextConfig.rows, nextConfig.cols));
+            setNextExpected(1);
+            setTimeLeft(nextConfig.timeLimit);
+            setStatus('playing');
         } else {
             setStatus('won');
         }
-    }, [levelIndex]);
+    }, [levelIndex, generateNumbers]);
 
     const restartGame = useCallback(() => {
         setLevelIndex(0);
@@ -92,10 +101,8 @@ export const useGameLogic = () => {
 
                 // Check if level complete
                 if (newNext > prev.length) {
-                    // Level Done
-                    // We'll handle status change in useEffect or here? 
-                    // Better here to avoid race conditions visually
-                    setTimeout(() => nextLevel(), 500); // Slight delay for visual satisfaction
+                    // Level Done - just set status, don't increment level yet
+                    setTimeout(() => setStatus('level_complete'), 500);
                 }
 
                 return prev.map(n => n.id === id ? { ...n, status: 'found' } : n);

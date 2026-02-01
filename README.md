@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# Shalty Number 🔢
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A speed puzzle game inspired by Schulte Tables. Find all numbers in ascending order before time runs out!
 
-Currently, two official plugins are available:
+![Shalty Number](public/icon.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎮 Features
 
-## React Compiler
+- **10 Levels** of increasing difficulty (3x3 → 8x9 grids)
+- **Leaderboard** with Top 10 high scores (saved locally)
+- **Smooth Animations** powered by Framer Motion
+- **Mobile Ready** with PWA + Capacitor support
+- **Modern UI** with glassmorphism and custom fonts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Quick Start
 
-## Expanding the ESLint configuration
+```bash
+# Install dependencies
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Run development server
+npm run dev
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Build for production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🐳 Docker Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Using Docker Compose
+docker compose up -d
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Or build manually
+docker build -t shalty-number .
+docker run -p 3000:3000 shalty-number
 ```
+
+Access at: `http://localhost:3000`
+
+## 📱 Mobile Development
+
+```bash
+# Sync with native platforms
+npx cap sync
+
+# Open in Android Studio
+npx cap open android
+
+# Open in Xcode (macOS only)
+npx cap open ios
+```
+
+## 🎯 Level Progression
+
+| Level | Grid | Numbers | Time |
+|-------|------|---------|------|
+| 1 | 3×3 | 9 | 40s |
+| 2 | 4×4 | 16 | 40s |
+| 3 | 5×5 | 25 | 45s |
+| 4 | 5×6 | 30 | 50s |
+| 5 | 6×6 | 36 | 55s |
+| 6 | 6×7 | 42 | 60s |
+| 7 | 7×7 | 49 | 65s |
+| 8 | 7×8 | 56 | 70s |
+| 9 | 8×8 | 64 | 75s |
+| 10 | 8×9 | 72 | 80s |
+
+## 🛠 Tech Stack
+
+- React 19 + TypeScript
+- Vite 7
+- TailwindCSS 3
+- Framer Motion
+- Capacitor (iOS/Android)
+
+## 📄 License
+
+MIT
